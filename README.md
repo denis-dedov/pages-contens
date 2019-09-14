@@ -1,24 +1,33 @@
-# README
+**rake db:create**
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**rake db:migrate**
 
-Things you may want to cover:
+**rake db:seed**
 
-* Ruby version
+```ruby
+Page.count
+# => 4
 
-* System dependencies
+Page.first.content_blocks.count
+# => 3
 
-* Configuration
+Page.first.content_blocks.first.pages.count
+# => 2
 
-* Database creation
+Page.first.content_blocks.first.pages.pluck(:id)
+# => [2, 1]
 
-* Database initialization
+Page.first.content_blocks.first.linked_page.id
+# = > 2
 
-* How to run the test suite
+Page.first.content_blocks.first.linked_page.content_blocks.count
+# => 6
 
-* Services (job queues, cache servers, search engines, etc.)
+Page.first.content_blocks.first.linked_page.content_blocks.pluck(:id)
+# => [1, 4, 5, 6, 7, 8]
 
-* Deployment instructions
+Page.first.content_blocks.first.linked_page.top_content_block.id
+# => 1
+```
 
-* ...
+The purpose of this repo is only to show a possible way to connect Pages and ContentBlocks (a raw implementation with working examples).
